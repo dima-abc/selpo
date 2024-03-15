@@ -3,9 +3,7 @@ package ru.selpo.manager.repository;
 import org.springframework.stereotype.Repository;
 import ru.selpo.manager.entity.Product;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.IntStream;
 
@@ -36,5 +34,17 @@ public class MemoryProductsRepository implements ProductRepository {
                         .orElse(0L) + 1);
         this.products.add(product);
         return product;
+    }
+
+    @Override
+    public Optional<Product> findById(Long productId) {
+        return this.products.stream()
+                .filter(product -> Objects.equals(product.getId(), productId))
+                .findFirst();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.products.removeIf(product -> Objects.equals(product.getId(), id));
     }
 }
