@@ -1,14 +1,10 @@
 package ru.selpo.catalogue.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,10 +12,7 @@ import ru.selpo.catalogue.controller.payload.NewProductPayload;
 import ru.selpo.catalogue.entity.Product;
 import ru.selpo.catalogue.service.ProductService;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Dmitry Stepanov, user Dmitry
@@ -32,8 +25,8 @@ public class ProductsRestController {
     private final ProductService productService;
 
     @GetMapping()
-    public List<Product> findProducts() {
-        return this.productService.findAllProducts();
+    public Iterable<Product> findProducts(@RequestParam(name = "filter", required = false) String filter) {
+        return this.productService.findAllProducts(filter);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

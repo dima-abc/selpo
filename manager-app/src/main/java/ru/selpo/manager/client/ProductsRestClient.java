@@ -11,7 +11,7 @@ import java.util.Optional;
  * @since 21.03.2024
  */
 public interface ProductsRestClient {
-    List<Product> findAllProducts();
+    List<Product> findAllProducts(String filter);
 
     Product createProduct(String title, String details);
 

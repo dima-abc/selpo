@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="210324_0002" author="admin">
+        <createTable tableName="t_product" schemaName="catalogue">
+            <column name="id" autoIncrement="true" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="c_title" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="c_details" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

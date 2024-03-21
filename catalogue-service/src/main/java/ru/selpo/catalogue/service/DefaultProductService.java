@@ -2,11 +2,11 @@ package ru.selpo.catalogue.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.selpo.catalogue.controller.payload.UpdateProductPayload;
 import ru.selpo.catalogue.entity.Product;
 import ru.selpo.catalogue.repository.ProductRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -20,10 +20,14 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> findAllProducts() {
+    public Iterable<Product> findAllProducts(String filter) {
+        if (filter != null && !filter.isBlank()) {
+            return productRepository.findAllByTitleLikeIgnoreCase("%" + filter + "%");
+        }
         return productRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Product createProduct(String title, String details) {
         return productRepository.save(new Product(null, title, details));
@@ -34,6 +38,7 @@ public class DefaultProductService implements ProductService {
         return productRepository.findById((long) productId);
     }
 
+    @Transactional
     @Override
     public void updateProduct(int id, UpdateProductPayload payload) {
         this.productRepository.findById((long) id)
@@ -45,6 +50,7 @@ public class DefaultProductService implements ProductService {
                 });
     }
 
+    @Transactional
     @Override
     public void deleteProductById(int id) {
         this.productRepository.deleteById((long) id);
