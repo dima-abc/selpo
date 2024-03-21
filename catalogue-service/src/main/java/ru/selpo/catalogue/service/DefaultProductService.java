@@ -1,10 +1,10 @@
-package ru.selpo.manager.service;
+package ru.selpo.catalogue.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.selpo.manager.controller.payload.UpdateProductPayload;
-import ru.selpo.manager.entity.Product;
-import ru.selpo.manager.repository.ProductRepository;
+import ru.selpo.catalogue.controller.payload.UpdateProductPayload;
+import ru.selpo.catalogue.entity.Product;
+import ru.selpo.catalogue.repository.ProductRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,13 +30,13 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public Optional<Product> findProduct(Integer productId) {
-        return productRepository.findById(Long.valueOf(productId));
+    public Optional<Product> findProduct(int productId) {
+        return productRepository.findById((long) productId);
     }
 
     @Override
-    public void updateProduct(Long id, UpdateProductPayload payload) {
-        this.productRepository.findById(id)
+    public void updateProduct(int id, UpdateProductPayload payload) {
+        this.productRepository.findById((long) id)
                 .ifPresentOrElse(product -> {
                     product.setTitle(payload.title());
                     product.setDetails(payload.details());
@@ -46,7 +46,7 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Long id) {
-        this.productRepository.deleteById(id);
+    public void deleteProductById(int id) {
+        this.productRepository.deleteById((long) id);
     }
 }

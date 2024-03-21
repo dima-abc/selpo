@@ -1,4 +1,4 @@
-package ru.selpo.manager.service;
+package ru.selpo.manager.client;
 
 import ru.selpo.manager.controller.payload.UpdateProductPayload;
 import ru.selpo.manager.entity.Product;
@@ -8,16 +8,16 @@ import java.util.Optional;
 
 /**
  * @author Dmitry Stepanov, user Dmitry
- * @since 14.03.2024
+ * @since 21.03.2024
  */
-public interface ProductService {
+public interface ProductsRestClient {
     List<Product> findAllProducts();
 
     Product createProduct(String title, String details);
 
-    Optional<Product> findProduct(Integer productId);
+    Optional<Product> findProduct(int productId);
 
-    void updateProduct(Long id, UpdateProductPayload payload);
+    void updateProduct(int productId, UpdateProductPayload payload);
 
-    void deleteProductById(Long id);
+    void deleteProduct(int productId);
 }

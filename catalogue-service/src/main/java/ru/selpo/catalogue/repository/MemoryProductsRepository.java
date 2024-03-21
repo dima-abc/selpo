@@ -1,7 +1,7 @@
-package ru.selpo.manager.repository;
+package ru.selpo.catalogue.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.selpo.manager.entity.Product;
+import ru.selpo.catalogue.entity.Product;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,7 +17,7 @@ public class MemoryProductsRepository implements ProductRepository {
 
     public MemoryProductsRepository() {
         IntStream.rangeClosed(1, 4)
-                .forEach(i -> this.products.add(new Product(Long.valueOf(i), "Товар №%d".formatted(i), "Описание товара №%d".formatted(i))));
+                .forEach(i -> this.products.add(new Product((long) i, "Товар №%d".formatted(i), "Описание товара №%d".formatted(i))));
     }
 
     @Override

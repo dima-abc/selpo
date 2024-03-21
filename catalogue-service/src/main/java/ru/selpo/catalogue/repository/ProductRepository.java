@@ -1,6 +1,6 @@
-package ru.selpo.manager.repository;
+package ru.selpo.catalogue.repository;
 
-import ru.selpo.manager.entity.Product;
+import ru.selpo.catalogue.entity.Product;
 
 import java.util.List;
 import java.util.Optional;
